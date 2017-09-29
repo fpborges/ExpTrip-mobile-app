@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.fervi.exptrip.LoginPage">
+
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/enter_email"
+        android:inputType="textEmailAddress"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/txtPassword"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintRight_toRightOf="@+id/txtPassword"
+        android:layout_marginBottom="29dp"
+        android:layout_marginRight="1dp" />
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
+        android:layout_marginStart="1dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="23dp"
+        app:layout_constraintLeft_toLeftOf="@+id/btnSignIn"
+        android:layout_marginLeft="1dp" />
+
+    <CheckBox
+        android:id="@+id/chRemember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remember_me"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/passForgot"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnSignIn"
+        tools:layout_constraintBaseline_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toRightOf="@+id/passForgot" />
+
+    <TextView
+        android:id="@+id/passForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_password"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/txtReg"
+        android:layout_marginStart="2dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintLeft_toLeftOf="@+id/txtReg"
+        android:layout_marginLeft="2dp" />
+
+    <TextView
+        android:id="@+id/txtReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="184dp"
+        android:onClick="sendRegister"
+        android:text="@string/create_an_account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        app:layout_constraintRight_toLeftOf="@+id/chRemember"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/passForgot"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="22dp"
+        android:layout_marginRight="15dp" />
+
+</android.support.constraint.ConstraintLayout>
