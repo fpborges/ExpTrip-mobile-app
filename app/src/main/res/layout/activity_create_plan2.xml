@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.fervi.exptrip.CreatePlan2">
+
+    <TextView
+        android:id="@+id/txtWhen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/when_do_you_want_to_go"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="51dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp" />
+
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/create"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="425dp" />
+
+    <DatePicker
+        android:id="@+id/datePicker2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtWhen"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp" />
+
+</RelativeLayout>

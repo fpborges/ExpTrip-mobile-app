@@ -1,7 +1,9 @@
 package com.example.fervi.exptrip;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class CreatePlanPage extends AppCompatActivity {
 
@@ -9,5 +11,9 @@ public class CreatePlanPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_plan_page);
+    }
+    public void sendCreate2(View view) {
+        Intent intent = new Intent(this, CreatePlan2.class);
+        startActivity(intent);
     }
 }

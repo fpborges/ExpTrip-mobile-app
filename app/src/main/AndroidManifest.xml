@@ -24,11 +24,11 @@
             android:label="@string/register_page" />
         <activity
             android:name=".PlanPage"
-            android:label="@string/planner_page"></activity>
+            android:label="@string/planner_page" />
         <activity
             android:name=".CreatePlanPage"
-            android:label="@string/create_plans">
-        </activity>
+            android:label="@string/create_plans"></activity>
+        <activity android:name=".CreatePlan2"></activity>
     </application>
 
 </manifest>
