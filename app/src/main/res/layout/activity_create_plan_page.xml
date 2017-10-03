@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,72 +10,38 @@
         android:id="@+id/txtPlanName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
         android:ems="10"
         android:hint="@string/enter_your_plan_name"
         android:inputType="textPersonName"
-        android:textAlignment="center"
-        tools:ignore="MissingConstraints"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"
-        tools:layout_constraintLeft_creator="1"
+        android:textAlignment="textStart"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints,RtlCompat"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <EditText
         android:id="@+id/txtWhere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtPlanName"
+        android:layout_alignStart="@+id/txtPlanName"
+        android:layout_below="@+id/txtPlanName"
+        android:layout_marginTop="18dp"
         android:ems="10"
         android:hint="@string/where_do_you_want_to_go"
         android:inputType="textPersonName"
-        app:layout_constraintRight_toLeftOf="@+id/txtMap"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toTopOf="@+id/txtMap"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="19dp"
-        android:layout_marginBottom="28dp" />
-
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="273dp"
-        android:layout_height="244dp"
-        android:textSize="12sp"
-        android:headerBackground="@android:color/holo_blue_dark"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toLeftOf="@+id/txtMap"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreate"
-        android:layout_marginStart="54dp"
-        android:layout_marginEnd="54dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="2dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtWhen"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="54dp"
-        android:layout_marginRight="54dp"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/txtWhen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/when_do_you_want_go"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="-17dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtMap"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.416" />
+        tools:ignore="RtlCompat" />
 
     <ImageButton
         android:id="@+id/imgMap"
@@ -84,13 +50,13 @@
         app:srcCompat="@android:drawable/ic_menu_mylocation"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/txtMap"
-        android:layout_marginStart="19dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/txtMap"
-        android:layout_marginLeft="26dp"
         android:contentDescription=""
         tools:ignore="ContentDescription"
-        android:layout_marginBottom="18dp" />
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/txtWhere"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/txtMap"
@@ -99,28 +65,28 @@
         android:text="@string/find_a_location"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="144dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="16dp" />
+        android:layout_below="@+id/imgMap"
+        android:layout_alignLeft="@+id/txtWhere"
+        android:layout_alignStart="@+id/txtWhere"
+        android:layout_marginLeft="59dp"
+        android:layout_marginStart="59dp" />
 
     <Button
-        android:id="@+id/btnCreate"
+        android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="113dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="113dp"
-        app:layout_constraintRight_toRightOf="@+id/txtMap"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="16dp"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="@+id/datePicker"
-        android:layout_marginLeft="113dp"
-        android:layout_marginRight="113dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintRight_toRightOf="@+id/txtMap"
+        tools:ignore="UnknownId"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

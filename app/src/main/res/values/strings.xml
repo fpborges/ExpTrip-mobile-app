@@ -8,7 +8,6 @@
     <string name="create_an_account">Create an Account</string>
     <string name="enter_email">Enter Email</string>
     <string name="enter_password">Enter Password</string>
-    <string name="forgot_password">Forgot password?</string>
     <string name="remember_me">Remember me</string>
     <string name="register_page">Create an Account</string>
     <string name="enter_your_email">Enter your Email</string>
@@ -22,8 +21,9 @@
     <string name="create_plans">Create your Plan</string>
     <string name="enter_your_country">Enter your Country</string>
     <string name="enter_your_plan_name">Enter your Plan Name</string>
-    <string name="create">Create</string>
     <string name="find_a_location">Find a Location</string>
     <string name="when_do_you_want_go">When do you want go?</string>
     <string name="where_do_you_want_to_go">Where do you want to go?</string>
+    <string name="next">Next</string>
+    <string name="forgot_password">Forgot Password?</string>
 </resources>
