@@ -1,0 +1,81 @@
+package com.example.fervi.exptrip.Activities;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.fervi.exptrip.Database.DataBaseHelper;
+import com.example.fervi.exptrip.R;
+
+public class LoginPage extends AppCompatActivity implements View.OnClickListener {
+
+
+    private final AppCompatActivity activity = LoginPage.this;
+    private EditText txtEmail;
+    private EditText txtPassword;
+    private Button btnSignIn;
+    private TextView txtReg;
+    private DataBaseHelper databaseHelper;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login_page);
+
+        btnSignIn = (Button)findViewById(R.id.btnSignIn);
+        txtReg = (TextView)findViewById(R.id.txtReg);
+        txtEmail = (EditText)findViewById(R.id.txtEmail);
+        txtPassword = (EditText)findViewById(R.id.txtRetype);
+
+
+        btnSignIn.setOnClickListener(this);
+        txtReg.setOnClickListener(this);
+
+        databaseHelper = new DataBaseHelper(activity);
+
+    }
+
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnSignIn:
+                validationFields();
+                break;
+            case R.id.txtReg:
+                startActivity(new Intent(this, RegisterPage.class));
+                break;
+        }
+    }
+
+
+    public void validationFields(){
+        txtEmail.setError(null);
+        txtPassword.setError(null);
+        String userEmail = txtEmail.getText().toString();
+        String userPassword = txtPassword.getText().toString();
+
+
+        if(userEmail.isEmpty() || userPassword.isEmpty())
+        {
+            Toast.makeText(this, "Email and Password are Required!", Toast.LENGTH_LONG).show();
+        }
+
+        else if (databaseHelper.checkUser(txtEmail.getText().toString().trim()
+                , txtPassword.getText().toString().trim())) {
+            Intent planIntent = new Intent(activity, PlanPage.class);
+            planIntent.putExtra("EMAIL", txtEmail.getText().toString().trim());
+            txtEmail.setText(null);
+            txtPassword.setText(null);
+            startActivity(planIntent);
+        }
+        else
+        {
+            Toast.makeText(this, "Email or Password do not match!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+}

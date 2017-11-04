@@ -1,9 +1,13 @@
-package com.example.fervi.exptrip;
+package com.example.fervi.exptrip.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.fervi.exptrip.Activities.LoginPage;
+import com.example.fervi.exptrip.Activities.RegisterPage;
+import com.example.fervi.exptrip.R;
 
 public class WelcomePage extends AppCompatActivity {
 

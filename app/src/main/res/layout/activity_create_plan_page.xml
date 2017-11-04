@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.fervi.exptrip.CreatePlanPage">
+    tools:context="com.example.fervi.exptrip.Activities.CreatePlanPage">
 
     <EditText
         android:id="@+id/txtPlanName"
@@ -47,16 +47,17 @@
         android:id="@+id/imgMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_mylocation"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/txtMap"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/txtMap"
-        android:contentDescription=""
-        tools:ignore="ContentDescription"
-        android:layout_marginTop="10dp"
         android:layout_below="@+id/txtWhere"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:contentDescription=""
+        android:onClick="sendToMap"
+        app:layout_constraintBottom_toTopOf="@+id/txtMap"
+        app:layout_constraintLeft_toLeftOf="@+id/txtMap"
+        app:srcCompat="@android:drawable/ic_menu_mylocation"
+        tools:ignore="ContentDescription"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <TextView
         android:id="@+id/txtMap"

@@ -1,9 +1,11 @@
-package com.example.fervi.exptrip;
+package com.example.fervi.exptrip.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.fervi.exptrip.R;
 
 public class CreatePlanPage extends AppCompatActivity {
 
@@ -14,6 +16,10 @@ public class CreatePlanPage extends AppCompatActivity {
     }
     public void sendCreate2(View view) {
         Intent intent = new Intent(this, CreatePlan2.class);
+        startActivity(intent);
+    }
+    public void sendToMap(View view) {
+        Intent intent = new Intent(this, MapPage.class);
         startActivity(intent);
     }
 }

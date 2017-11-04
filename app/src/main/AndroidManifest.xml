@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fervi.exptrip">
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomePage">
+        <activity android:name=".Activities.WelcomePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,18 +24,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginPage"
+            android:name=".Activities.LoginPage"
             android:label="@string/login_page" />
         <activity
-            android:name=".RegisterPage"
+            android:name=".Activities.RegisterPage"
             android:label="@string/register_page" />
         <activity
-            android:name=".PlanPage"
+            android:name=".Activities.PlanPage"
             android:label="@string/planner_page" />
         <activity
-            android:name=".CreatePlanPage"
-            android:label="@string/create_plans"></activity>
-        <activity android:name=".CreatePlan2"></activity>
+            android:name=".Activities.CreatePlanPage"
+            android:label="@string/create_plans" />
+        <activity android:name=".Activities.CreatePlan2" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".Activities.MapPage"
+            android:label="@string/title_activity_map_page" />
+        <activity android:name=".Activities.CreatePlan3"></activity>
     </application>
 
 </manifest>
