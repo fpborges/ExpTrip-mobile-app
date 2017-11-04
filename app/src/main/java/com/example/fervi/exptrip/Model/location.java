@@ -3,7 +3,10 @@ package com.example.fervi.exptrip.Model;
 import java.util.Date;
 
 /**
- * Created by Fervi on 2017-10-22.
+ * Created by Fernando Pereira Borges
+ * Assignment2 - Mobile Development 2
+ * Date: November 03, 2017
+ * Purpose: Database implementation - user Database
  */
 
 public class location {

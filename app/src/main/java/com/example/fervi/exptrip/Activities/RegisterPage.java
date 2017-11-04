@@ -1,3 +1,10 @@
+/**
+ * Created by Fernando Pereira Borges
+ * Assignment2 - Mobile Development 2
+ * Date: November 03, 2017
+ * Purpose: Database implementation - user Database
+ */
+
 package com.example.fervi.exptrip.Activities;
 
 
@@ -26,7 +33,7 @@ public class RegisterPage extends AppCompatActivity implements View.OnClickListe
     private EditText txtPassword;
     private EditText txtRetype;
     public static String SuccessMessage = "Account created!";
-    public static String ErrorMessage = "Email already registered - Error!";
+    public static String ErrorMessage = "Email already registered!";
     private DataBaseHelper databaseHelper;
     private user user;
 

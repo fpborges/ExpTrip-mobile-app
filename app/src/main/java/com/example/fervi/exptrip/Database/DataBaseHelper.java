@@ -1,3 +1,10 @@
+/**
+ * Created by Fernando Pereira Borges
+ * Assignment2 - Mobile Development 2
+ * Date: November 03, 2017
+ * Purpose: Database implementation - user Database
+ */
+
 package com.example.fervi.exptrip.Database;
 
 import android.content.ContentValues;
@@ -8,9 +15,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.fervi.exptrip.Model.user;
 
-/**
- * Created by Fervi on 2017-10-24.
- */
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 

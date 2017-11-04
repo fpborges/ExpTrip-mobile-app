@@ -1,7 +1,10 @@
 package com.example.fervi.exptrip.Model;
 
 /**
- * Created by Fervi on 2017-10-19.
+ * Created by Fernando Pereira Borges
+ * Assignment2 - Mobile Development 2
+ * Date: November 03, 2017
+ * Purpose: Database implementation - user Database
  */
 
 public class user {

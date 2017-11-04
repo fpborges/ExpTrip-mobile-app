@@ -1,3 +1,9 @@
+/**
+ * Created by Fernando Pereira Borges
+ * Assignment2 - Mobile Development 2
+ * Date: November 03, 2017
+ * Purpose: Database implementation - user Database
+ */
 package com.example.fervi.exptrip.Activities;
 
 import android.support.v4.app.FragmentActivity;
