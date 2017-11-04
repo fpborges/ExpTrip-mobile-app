@@ -71,19 +71,17 @@ public class RegisterPage extends AppCompatActivity implements View.OnClickListe
         {
             Toast.makeText(this, "Email and Password are Required!", Toast.LENGTH_LONG).show();
         }
-        if(!userEmail.matches(emailPattern))
+        else if(!userEmail.matches(emailPattern))
         {
             Toast.makeText(this, "Please check the Email format", Toast.LENGTH_LONG).show();
+            txtEmail.requestFocus();
         }
-        if(!userRetype.matches(userPassword))
-        {
-            Toast.makeText(this, "Please retype your password", Toast.LENGTH_LONG).show();
-        }
-        if (!userPassword.matches(userRetype))
+        else if(!userRetype.matches(userPassword))
         {
             Toast.makeText(this, "Both passwords must be the same", Toast.LENGTH_LONG).show();
+            txtRetype.requestFocus();
         }
-        if (!databaseHelper.checkEmail(txtEmail.getText().toString().trim())) {
+        else if (!databaseHelper.checkEmail(txtEmail.getText().toString().trim())) {
 
             user.setFirst_name(txtFirstName.getText().toString().trim());
             user.setLast_name(txtLastName.getText().toString().trim());
