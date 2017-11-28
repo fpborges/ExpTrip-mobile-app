@@ -11,10 +11,9 @@ package com.example.fervi.exptrip.Model;
 public class plan {
     private int planid;
     private String plan_name;
-    private Number budget;
+    private Double budget;
     private String description;
     private int userid;
-    private int locationid;
 
     public plan(int planid){
         this.planid = planid;
@@ -22,6 +21,7 @@ public class plan {
 
     public int getPlanid()
     {return planid;}
+
     public void setPlanid(int planid)
     {this.planid = planid;}
 
@@ -30,9 +30,9 @@ public class plan {
     public void setPlan_name(String plan_name)
     {this.plan_name = plan_name;}
 
-    public Number getBudget()
+    public Double getBudget()
     {return budget;}
-    public void setBudget(Number budget)
+    public void setBudget(Double budget)
     {this.budget = budget;}
 
     public String getDescription()
@@ -44,10 +44,4 @@ public class plan {
     {return userid;}
     public void setUserid(int userid)
     {this.userid = userid;}
-
-    public int getLocationid()
-    {return locationid;}
-    public void setLocationid(int locationid)
-    {this.locationid = locationid;}
-
 }

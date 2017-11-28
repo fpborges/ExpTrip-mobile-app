@@ -28,6 +28,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private TextView txtReg;
     private DataBaseHelper databaseHelper;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +81,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         }
         else
         {
-            Toast.makeText(this, "Email or Password do not match!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Email or Password invalid!", Toast.LENGTH_LONG).show();
         }
     }
 
