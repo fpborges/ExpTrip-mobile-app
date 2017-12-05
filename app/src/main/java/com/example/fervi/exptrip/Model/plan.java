@@ -15,13 +15,10 @@ public class plan {
     private String description;
     private int userid;
 
-    public plan(int planid){
-        this.planid = planid;
-    }
+    public plan(){}
 
     public int getPlanid()
     {return planid;}
-
     public void setPlanid(int planid)
     {this.planid = planid;}
 

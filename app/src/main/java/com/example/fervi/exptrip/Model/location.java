@@ -15,9 +15,7 @@ public class location {
     private String start_date;
     private String end_date;
 
-    public void location(int locationid){
-        this.locationid = locationid;
-    }
+    public location(){}
 
     public int getLocationid()
     {return locationid;}

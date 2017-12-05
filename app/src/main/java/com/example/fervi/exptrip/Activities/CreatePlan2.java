@@ -14,19 +14,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fervi.exptrip.R;
 
 import java.util.Calendar;
 
 
-public class CreatePlan2 extends AppCompatActivity {
+public class CreatePlan2 extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "CreatePlan2";
     private TextView startDate;
     private TextView endDate;
+
+    private EditText start_date;
+    private EditText end_date;
+    private EditText budget;
+    private String plan_Name;
+    private String location_Name;
+    private Button btnNext;
+
+
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private DatePickerDialog.OnDateSetListener mDateSetListener2;
 
@@ -37,6 +49,13 @@ public class CreatePlan2 extends AppCompatActivity {
 
         startDate = (TextView) findViewById(R.id.startDate);
         endDate = (TextView) findViewById(R.id.endDate);
+
+        start_date = (EditText)findViewById(R.id.startDate);
+        end_date = (EditText)findViewById(R.id.endDate);
+        budget = (EditText)findViewById(R.id.txtBudget);
+        btnNext =(Button)findViewById(R.id.btnGoCreate);
+
+
 
         //Handle start date calendar
         startDate.setOnClickListener(new View.OnClickListener() {
@@ -96,12 +115,50 @@ public class CreatePlan2 extends AppCompatActivity {
             }
         };
 
-
-
-
+        btnNext.setOnClickListener(this);
     }
-    public void sendCreate3(View view) {
-        Intent intent = new Intent(this, CreatePlan3.class);
-        startActivity(intent);
+
+    public void SendToCreatePlan3() {
+
+        Intent SecondActivity = getIntent();
+        plan_Name = SecondActivity.getStringExtra("PLAN_NAME");
+        location_Name = SecondActivity.getStringExtra("LOCATION_NAME");
+
+
+        //Get and Set Strings from Previous activity
+       // plan_Name = getIntent().getStringExtra("PLAN_NAME");
+       // location_Name = getIntent().getStringExtra("LOCATION_NAME");
+
+        String startDate = start_date.getText().toString();
+        String endDate = end_date.getText().toString();
+
+        Double nBudget = Double.parseDouble(budget.getText().toString());
+
+
+        if(startDate.isEmpty() || endDate.isEmpty())
+        {
+            Toast.makeText(this, "Please enter dates above", Toast.LENGTH_LONG).show();
+        }
+        else
+            {
+            // first parameter is the context, second is the class of the activity to launch
+            Intent planName2 = new Intent(CreatePlan2.this, CreatePlan3.class);
+                planName2.putExtra("PLAN_NAME_AC1", plan_Name);
+                planName2.putExtra("LOC_NAME_AC1", location_Name);
+                planName2.putExtra("START_DATE", startDate.trim());
+                planName2.putExtra("END_DATE", endDate.trim());
+                planName2.putExtra("BUDGET", nBudget);
+                // brings up the second activity
+                startActivity(planName2);
+            }
+    }
+
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.btnGoCreate:
+                SendToCreatePlan3();
+                break;
+        }
     }
 }

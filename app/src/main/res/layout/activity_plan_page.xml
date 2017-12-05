@@ -7,13 +7,12 @@
     tools:context="com.example.fervi.exptrip.Activities.PlanPage">
 
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/btnGoCreate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:onClick="SendCreate"
         android:text="@string/create_a_plan"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,13 +32,13 @@
         android:layout_marginEnd="29dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="68dp"
-        app:layout_constraintTop_toBottomOf="@+id/btnNext"
+        app:layout_constraintTop_toBottomOf="@+id/btnGoCreate"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="66dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="29dp"
         android:layout_marginRight="29dp"
-        android:id="@+id/listView" />
+        android:id="@+id/planList" />
 
     <TextView
         android:id="@+id/yourPlans"
@@ -51,28 +50,41 @@
         tools:ignore="MissingConstraints"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintBottom_toTopOf="@+id/planList"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="8dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
-        android:layout_width="184dp"
-        android:layout_height="0dp"
         android:id="@+id/welcomeUser"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        android:layout_width="226dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="31dp"
+        android:layout_marginTop="44dp"
         android:padding="16dp"
-        tools:ignore="MissingConstraints"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/yourPlans"
+        app:layout_constraintLeft_toLeftOf="@+id/btnGoCreate"
+        app:layout_constraintTop_toTopOf="@+id/btnGoCreate"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded,SmallSp"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="3dp"
+        android:text="Profile"
+        android:textSize="12sp"
+        tools:ignore="HardcodedText,MissingConstraints"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/yourPlans"
-        app:layout_constraintRight_toRightOf="@+id/yourPlans"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="16dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="26dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/yourPlans" />
+        android:layout_marginRight="3dp" />
 </android.support.constraint.ConstraintLayout>

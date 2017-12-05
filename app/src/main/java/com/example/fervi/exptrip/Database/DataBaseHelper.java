@@ -20,40 +20,40 @@ import com.example.fervi.exptrip.Model.location;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     //Database
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "ExpTripDatabase.db";
+    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "ExpTripDatabase.db";
 
     //user variables
-    private static final String TABLE_USER= "user";
-    private static final String COLUMN_USER_ID = "user_id";
-    private static final String COLUMN_FIRST_NAME = "first_name";
-    private static final String COLUMN_LAST_NAME = "last_name";
-    private static final String COLUMN_COUNTRY = "country";
-    private static final String COLUMN_EMAIL = "email";
-    private static final String COLUMN_PASSWORD = "password";
+    public static final String TABLE_USER= "user";
+    public static final String COLUMN_USER_ID = "user_id";
+    public static final String COLUMN_FIRST_NAME = "first_name";
+    public static final String COLUMN_LAST_NAME = "last_name";
+    public static final String COLUMN_COUNTRY = "country";
+    public static final String COLUMN_EMAIL = "email";
+    public static final String COLUMN_PASSWORD = "password";
 
     //plan variables
-    private static final String TABLE_PLAN = "plan";
-    private static final String COLUMN_PLAN_ID = "plan_id";
-    private static final String COLUMN_PLAN_NAME = "plan_name";
-    private static final String COLUMN_BUDGET = "budget";
-    private static final String COLUMN_DESCRIPTION = "description";
+    public static final String TABLE_PLAN = "plan";
+    public static final String COLUMN_PLAN_ID = "plan_id";
+    public static final String COLUMN_PLAN_NAME = "plan_name";
+    public static final String COLUMN_BUDGET = "budget";
+    public static final String COLUMN_DESCRIPTION = "description";
 
     //plan_location variables
-    private static final String TABLE_PLAN_LOCATION = "plan_location";
-    private static final String COLUMN_KEY_ID = "id";
+    public static final String TABLE_PLAN_LOCATION = "plan_location";
+    public static final String COLUMN_KEY_ID = "id";
 
 
     //location variables
-    private static final String TABLE_LOCATION= "location";
-    private static final String COLUMN_LOCATION_ID = "location_id";
-    private static final String COLUMN_LOCATION_NAME = "location_name";
-    private static final String COLUMN_START_DATE = "start_date";
-    private static final String COLUMN_END_DATE = "end_date";
+    public static final String TABLE_LOCATION= "location";
+    public static final String COLUMN_LOCATION_ID = "location_id";
+    public static final String COLUMN_LOCATION_NAME = "location_name";
+    public static final String COLUMN_START_DATE = "start_date";
+    public static final String COLUMN_END_DATE = "end_date";
 
 
     //Create user table
-    private String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER +
+    public String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER +
             " (" + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             COLUMN_FIRST_NAME + " TEXT," +
             COLUMN_LAST_NAME + " TEXT," +
@@ -64,18 +64,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
     //create plan table
-    private String CREATE_TABLE_PLAN = "CREATE TABLE " + TABLE_PLAN +
+    public String CREATE_TABLE_PLAN = "CREATE TABLE " + TABLE_PLAN +
             " (" + COLUMN_PLAN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             COLUMN_PLAN_NAME + " TEXT," +
             COLUMN_BUDGET + " DOUBLE," +
             COLUMN_DESCRIPTION + " TEXT," +
-            COLUMN_USER_ID + " INTEGER,"
+            COLUMN_USER_ID + " INTEGER, "
             + " FOREIGN KEY ("+COLUMN_USER_ID+") REFERENCES " + TABLE_USER + "("+COLUMN_USER_ID+"));";
 
 
 
     //create location table
-    private String CREATE_TABLE_LOCATION = "CREATE TABLE " + TABLE_LOCATION +
+    public String CREATE_TABLE_LOCATION = "CREATE TABLE " + TABLE_LOCATION +
             " (" + COLUMN_LOCATION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             COLUMN_LOCATION_NAME + " TEXT," +
             COLUMN_START_DATE + " TEXT," +
@@ -83,18 +83,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
     //create plan_location table
-     private String CREATE_TABLE_PLAN_LOCATION = "CREATE TABLE " + TABLE_PLAN_LOCATION +
+     public String CREATE_TABLE_PLAN_LOCATION = "CREATE TABLE " + TABLE_PLAN_LOCATION +
            " (" + COLUMN_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             COLUMN_PLAN_ID + " INTEGER," + COLUMN_LOCATION_ID + " INTEGER" + ")";
 
 
-    private String DROP_TABLE_USER = "DROP TABLE IF EXISTS " + TABLE_USER;
+    public String DROP_TABLE_USER = "DROP TABLE IF EXISTS " + TABLE_USER;
 
-    private String DROP_TABLE_PLAN = "DROP TABLE IF EXISTS " + TABLE_PLAN;
+    public String DROP_TABLE_PLAN = "DROP TABLE IF EXISTS " + TABLE_PLAN;
 
-    private String DROP_TABLE_LOCATION = "DROP TABLE IF EXISTS " + TABLE_LOCATION;
+    public String DROP_TABLE_LOCATION = "DROP TABLE IF EXISTS " + TABLE_LOCATION;
 
-    private String DROP_TABLE_PLAN_LOCATION = "DROP TABLE IF EXISTS " + TABLE_PLAN_LOCATION;
+    public String DROP_TABLE_PLAN_LOCATION = "DROP TABLE IF EXISTS " + TABLE_PLAN_LOCATION;
 
     public DataBaseHelper(Context context)
     {
@@ -156,7 +156,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    //check
+    //check If email already exist
     public boolean checkEmail(String email){
         String[] columns = {
                 COLUMN_USER_ID
@@ -206,10 +206,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
-        //Method to get all information from user
-    public Cursor getProfile(){
+    public Cursor getPlanList()
+    {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor profile = db.rawQuery("SELECT * FROM " + TABLE_USER, null);
+        Cursor planData = db.rawQuery("SELECT * FROM "+ TABLE_PLAN, null);
+        return planData;
+    }
+    public Cursor getLocation()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor planLocation = db.rawQuery("SELECT * FROM "+ TABLE_LOCATION, null);
+        return planLocation;
+    }
+
+    public Cursor GetProfile(SQLiteDatabase db)
+    {
+        Cursor cursor;
+        String[] profileInfo = {COLUMN_FIRST_NAME, COLUMN_LAST_NAME, COLUMN_COUNTRY, COLUMN_EMAIL};
+        cursor = db.query(TABLE_USER,profileInfo,null,null,null,null,null);
+        return cursor;
+    }
+
+        //Method to get all information from user
+    public Cursor getProfile(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor profile = db.rawQuery("SELECT * FROM " + TABLE_USER + " WHERE "+ COLUMN_EMAIL+"=? ", new String[] {email});
         return profile;
     }
 

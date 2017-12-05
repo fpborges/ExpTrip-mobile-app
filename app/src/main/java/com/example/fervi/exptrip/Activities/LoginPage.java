@@ -6,7 +6,9 @@
  */
 package com.example.fervi.exptrip.Activities;
 
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -27,6 +29,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private Button btnSignIn;
     private TextView txtReg;
     private DataBaseHelper databaseHelper;
+    public static final String MY_PREF_NAME = "MyPrefFile";
 
 
     @Override
@@ -44,7 +47,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         txtReg.setOnClickListener(this);
 
         databaseHelper = new DataBaseHelper(activity);
-
     }
 
     public void onClick(View v) {
@@ -57,7 +59,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 break;
         }
     }
-
 
     public void validationFields(){
         txtEmail.setError(null);
@@ -73,11 +74,16 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
         else if (databaseHelper.checkUser(txtEmail.getText().toString().trim()
                 , txtPassword.getText().toString().trim())) {
-            Intent planIntent = new Intent(activity, PlanPage.class);
-            planIntent.putExtra("EMAIL", txtEmail.getText().toString().trim());
+
+            SharedPreferences.Editor editor = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE).edit();
+            editor.putString("CUR_EMAIL", userEmail);
+            editor.commit();
+            //using intent to save email:
+            //Intent planIntent = new Intent(activity, PlanPage.class);
+            // planIntent.putExtra("EMAIL", txtEmail.getText().toString().trim());
             txtEmail.setText(null);
             txtPassword.setText(null);
-            startActivity(planIntent);
+            startActivity(new Intent(LoginPage.this, PlanPage.class));
         }
         else
         {
