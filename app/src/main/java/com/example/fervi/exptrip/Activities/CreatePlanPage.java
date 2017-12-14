@@ -60,7 +60,6 @@ public class CreatePlanPage extends AppCompatActivity implements View.OnClickLis
             startActivity(nextPage);
         }
     }
-
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnGoCreate:

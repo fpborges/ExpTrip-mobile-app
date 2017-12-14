@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -62,7 +63,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
         //textViewFirstName.setText(cur_email);
 
         ArrayList<String> plan_list = new ArrayList<>();
-        ArrayList<String> plan_location = new ArrayList<>();
+        //ArrayList<String> plan_location = new ArrayList<>();
         Cursor planData = databaseHelper.getPlanList();
         Cursor planLocation = databaseHelper.getLocation();
         if(planData.getCount() == 0 && planLocation.getCount() == 0)
@@ -73,9 +74,18 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
             while(planData.moveToNext() && planLocation.moveToNext())
             {
                 plan_list.add(planData.getString(1));
-                plan_location.add(planLocation.getString(1));
+                //plan_location.add(planLocation.getString(1));
                 ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,plan_list);
                 listView.setAdapter(listAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        if(position == 0){
+                            ViewPlanProfile();
+                        }
+                    }
+                });
+
             }
         }
 
@@ -112,6 +122,52 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
                 intent.putExtra("L_NAME", lName);
                 intent.putExtra("U_COUNTRY", uCountry);
                 intent.putExtra("U_EMAIL", uEmail);
+                startActivity(intent);
+                finish();
+            }
+        }
+    }
+
+    public void ViewPlanProfile()
+    {
+        /*cursor = db.rawQuery(("SELECT "+ "u."+DataBaseHelper.COLUMN_EMAIL + " s."+DataBaseHelper.COLUMN_PLAN_NAME +
+                                " n."+DataBaseHelper.COLUMN_LOCATION_NAME + " n."+DataBaseHelper.COLUMN_START_DATE +
+                                " n."+DataBaseHelper.COLUMN_END_DATE + " s."+DataBaseHelper.COLUMN_BUDGET +
+                                " s."+DataBaseHelper.COLUMN_DESCRIPTION +
+                                " FROM " + DataBaseHelper.TABLE_USER + " u " +  " JOIN " +
+                                DataBaseHelper.TABLE_PLAN + " s " +" ON "+  " (u."+DataBaseHelper.COLUMN_USER_ID +" = "+
+                                "s."+DataBaseHelper.COLUMN_USER_ID + ") JOIN " +
+                                DataBaseHelper.TABLE_PLAN_LOCATION + " t " + " ON " + " (s."+DataBaseHelper.COLUMN_PLAN_ID +" = "+
+                                "t."+DataBaseHelper.COLUMN_PLAN_ID + ") JOIN " + DataBaseHelper.TABLE_LOCATION + " n "+ " ON "+
+                                 "( t."+DataBaseHelper.COLUMN_LOCATION_ID+ " = "+" n."+DataBaseHelper.COLUMN_LOCATION_ID+") ")
+                + " WHERE "+ DataBaseHelper.COLUMN_EMAIL+"=? ", new String[]{cur_email});*/
+
+        cursor = db.rawQuery("SELECT "+ DataBaseHelper.TABLE_USER+"."+DataBaseHelper.COLUMN_EMAIL + " " + DataBaseHelper.TABLE_PLAN +"."+DataBaseHelper.COLUMN_PLAN_NAME +
+              " " + DataBaseHelper.TABLE_PLAN+"."+DataBaseHelper.COLUMN_BUDGET + " s."+DataBaseHelper.COLUMN_DESCRIPTION +
+                " FROM " + DataBaseHelper.TABLE_USER + " AS " + " u " +  " JOIN " +
+                DataBaseHelper.TABLE_PLAN + " AS " +" s " +" ON "+  " u."+DataBaseHelper.COLUMN_USER_ID +" = "+
+                "s."+DataBaseHelper.COLUMN_USER_ID
+                + " WHERE "+ DataBaseHelper.COLUMN_EMAIL+"=? ", new String[]{cur_email});
+
+
+        if(cursor != null)
+        {
+            if(cursor.getCount() > 0)
+            {
+                cursor.moveToFirst();
+                String pName = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_PLAN_NAME));
+               // String pLocation = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_LOCATION_NAME));
+               // String psDate = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_START_DATE));
+             //   String peDate = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_END_DATE));
+                Double pBudget = cursor.getDouble(cursor.getColumnIndex(DataBaseHelper.COLUMN_BUDGET));
+                String pDesc = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_DESCRIPTION));
+                Intent intent = new Intent(PlanPage.this, PlanProfile.class);
+                intent.putExtra("P_NAME", pName);
+              //  intent.putExtra("P_LOCATION", pLocation);
+              //  intent.putExtra("S_DATE", psDate);
+               // intent.putExtra("E_DATE", peDate);
+                intent.putExtra("P_BUDGET", pBudget);
+                intent.putExtra("P_DESC", pDesc);
                 startActivity(intent);
                 finish();
             }

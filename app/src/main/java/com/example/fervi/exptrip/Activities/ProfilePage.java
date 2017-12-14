@@ -68,6 +68,4 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
                 break;
         }
     }
-
-
 }

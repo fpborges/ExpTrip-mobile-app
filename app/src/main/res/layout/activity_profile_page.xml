@@ -40,10 +40,13 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         tools:ignore="HardcodedText,MissingConstraints"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
-        tools:layout_constraintBaseline_creator="1"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="27dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLastName"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewEmail" />
+        app:layout_constraintLeft_toRightOf="@+id/textView3"
+        android:layout_marginLeft="18dp" />
 
     <TextView
         android:id="@+id/textViewEmail"
@@ -51,13 +54,10 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLastName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+        tools:layout_constraintBaseline_creator="1"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toRightOf="@+id/textView3"
-        android:layout_marginLeft="18dp" />
+        app:layout_constraintLeft_toLeftOf="@+id/textViewCountry" />
 
     <Button
         android:id="@+id/btnUpdate"
@@ -114,26 +114,24 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp"
         android:text="Country:"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewEmail"
-        app:layout_constraintLeft_toLeftOf="@+id/textView2"
         tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_constraintBaseline_creator="1"
-        tools:layout_constraintLeft_creator="1" />
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/textView2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewCountry"
+        tools:layout_constraintBaseline_creator="1" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginEnd="17dp"
         android:text="Email:"
-        app:layout_constraintRight_toLeftOf="@+id/textViewCountry"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="HardcodedText,MissingConstraints"
+        app:layout_constraintRight_toLeftOf="@+id/textViewEmail"
+        tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        android:layout_marginTop="26dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:layout_marginRight="17dp" />
 </android.support.constraint.ConstraintLayout>

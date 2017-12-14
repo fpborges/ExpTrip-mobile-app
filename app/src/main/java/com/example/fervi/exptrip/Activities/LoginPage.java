@@ -78,9 +78,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             SharedPreferences.Editor editor = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE).edit();
             editor.putString("CUR_EMAIL", userEmail);
             editor.commit();
-            //using intent to save email:
-            //Intent planIntent = new Intent(activity, PlanPage.class);
-            // planIntent.putExtra("EMAIL", txtEmail.getText().toString().trim());
             txtEmail.setText(null);
             txtPassword.setText(null);
             startActivity(new Intent(LoginPage.this, PlanPage.class));
