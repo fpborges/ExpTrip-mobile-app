@@ -36,6 +36,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
     private DataBaseHelper databaseHelper;
     private Button btnProfile;
     private Button btnGoToCreate;
+    public Button btnLogout;
     public String cur_email;
     Cursor cursor;
     SQLiteDatabase db;
@@ -53,6 +54,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
 
         btnProfile = (Button)findViewById(R.id.btnProfile);
         btnGoToCreate = (Button)findViewById(R.id.btnGoCreate);
+        btnLogout = (Button)findViewById(R.id.btnLogout);
 
         textViewFirstName = (TextView)findViewById(R.id.welcomeUser);
 
@@ -63,18 +65,15 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
         //textViewFirstName.setText(cur_email);
 
         ArrayList<String> plan_list = new ArrayList<>();
-        //ArrayList<String> plan_location = new ArrayList<>();
         Cursor planData = databaseHelper.getPlanList();
-        Cursor planLocation = databaseHelper.getLocation();
-        if(planData.getCount() == 0 && planLocation.getCount() == 0)
+        if(planData.getCount() == 0)
         {
-            Toast.makeText(this, "no data found", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Create a plan", Toast.LENGTH_LONG).show();
         }
         else{
-            while(planData.moveToNext() && planLocation.moveToNext())
+            while(planData.moveToNext())
             {
                 plan_list.add(planData.getString(1));
-                //plan_location.add(planLocation.getString(1));
                 ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,plan_list);
                 listView.setAdapter(listAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,7 +84,6 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
                         }
                     }
                 });
-
             }
         }
 
@@ -101,7 +99,20 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
             case R.id.btnGoCreate:
                 startActivity(new Intent(PlanPage.this, CreatePlanPage.class));
                 break;
+            case R.id.btnLogout:
+                logOut();
+                break;
         }
+    }
+
+    public void logOut()
+    {
+        SharedPreferences sharedpreferences = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.commit();
+        Intent intent = new Intent(this, LoginPage.class);
+        startActivity(intent);
     }
 
     public void ViewProfile()
