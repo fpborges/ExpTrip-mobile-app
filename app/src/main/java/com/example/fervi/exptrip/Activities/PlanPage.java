@@ -130,23 +130,11 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
 
     public void ViewPlanProfile()
     {
-        /*cursor = db.rawQuery(("SELECT "+ "u."+DataBaseHelper.COLUMN_EMAIL + " s."+DataBaseHelper.COLUMN_PLAN_NAME +
-                                " n."+DataBaseHelper.COLUMN_LOCATION_NAME + " n."+DataBaseHelper.COLUMN_START_DATE +
-                                " n."+DataBaseHelper.COLUMN_END_DATE + " s."+DataBaseHelper.COLUMN_BUDGET +
-                                " s."+DataBaseHelper.COLUMN_DESCRIPTION +
-                                " FROM " + DataBaseHelper.TABLE_USER + " u " +  " JOIN " +
-                                DataBaseHelper.TABLE_PLAN + " s " +" ON "+  " (u."+DataBaseHelper.COLUMN_USER_ID +" = "+
-                                "s."+DataBaseHelper.COLUMN_USER_ID + ") JOIN " +
-                                DataBaseHelper.TABLE_PLAN_LOCATION + " t " + " ON " + " (s."+DataBaseHelper.COLUMN_PLAN_ID +" = "+
-                                "t."+DataBaseHelper.COLUMN_PLAN_ID + ") JOIN " + DataBaseHelper.TABLE_LOCATION + " n "+ " ON "+
-                                 "( t."+DataBaseHelper.COLUMN_LOCATION_ID+ " = "+" n."+DataBaseHelper.COLUMN_LOCATION_ID+") ")
-                + " WHERE "+ DataBaseHelper.COLUMN_EMAIL+"=? ", new String[]{cur_email});*/
-
-        cursor = db.rawQuery("SELECT "+ DataBaseHelper.TABLE_USER+"."+DataBaseHelper.COLUMN_EMAIL + " " + DataBaseHelper.TABLE_PLAN +"."+DataBaseHelper.COLUMN_PLAN_NAME +
-              " " + DataBaseHelper.TABLE_PLAN+"."+DataBaseHelper.COLUMN_BUDGET + " s."+DataBaseHelper.COLUMN_DESCRIPTION +
-                " FROM " + DataBaseHelper.TABLE_USER + " AS " + " u " +  " JOIN " +
-                DataBaseHelper.TABLE_PLAN + " AS " +" s " +" ON "+  " u."+DataBaseHelper.COLUMN_USER_ID +" = "+
-                "s."+DataBaseHelper.COLUMN_USER_ID
+        cursor = db.rawQuery("SELECT * FROM " +
+                DataBaseHelper.TABLE_USER +" a " + "INNER JOIN " + DataBaseHelper.TABLE_PLAN + " b " +
+                " ON "+ "a."+DataBaseHelper.COLUMN_USER_ID +" = " +"b."+DataBaseHelper.COLUMN_PLAN_ID +
+                " INNER JOIN " + DataBaseHelper.TABLE_LOCATION + " c " +
+                " ON "+ "c."+DataBaseHelper.COLUMN_LOCATION_ID +" = " +"b."+DataBaseHelper.COLUMN_PLAN_ID
                 + " WHERE "+ DataBaseHelper.COLUMN_EMAIL+"=? ", new String[]{cur_email});
 
 
@@ -156,16 +144,16 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
             {
                 cursor.moveToFirst();
                 String pName = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_PLAN_NAME));
-               // String pLocation = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_LOCATION_NAME));
-               // String psDate = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_START_DATE));
-             //   String peDate = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_END_DATE));
+                String pLocation = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_LOCATION_NAME));
+                String psDate = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_START_DATE));
+                String peDate = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_END_DATE));
                 Double pBudget = cursor.getDouble(cursor.getColumnIndex(DataBaseHelper.COLUMN_BUDGET));
                 String pDesc = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_DESCRIPTION));
                 Intent intent = new Intent(PlanPage.this, PlanProfile.class);
                 intent.putExtra("P_NAME", pName);
-              //  intent.putExtra("P_LOCATION", pLocation);
-              //  intent.putExtra("S_DATE", psDate);
-               // intent.putExtra("E_DATE", peDate);
+                intent.putExtra("P_LOCATION", pLocation);
+                intent.putExtra("S_DATE", psDate);
+                intent.putExtra("E_DATE", peDate);
                 intent.putExtra("P_BUDGET", pBudget);
                 intent.putExtra("P_DESC", pDesc);
                 startActivity(intent);

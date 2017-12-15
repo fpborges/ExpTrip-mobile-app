@@ -33,16 +33,16 @@ public class PlanProfile extends AppCompatActivity {
         Intent intent = getIntent();
 
         String p_name = intent.getStringExtra("P_NAME");
-       // String l_name = intent.getStringExtra("P_LOCATION");
-       // String s_date = intent.getStringExtra("S_DATE");
-       // String e_date = intent.getStringExtra("E_DATE");
+        String l_name = intent.getStringExtra("P_LOCATION");
+        String s_date = intent.getStringExtra("S_DATE");
+        String e_date = intent.getStringExtra("E_DATE");
         String stringDoubleBudget= Double.toString(getIntent().getDoubleExtra("P_BUDGET", 0));
         String p_desc = intent.getStringExtra("P_DESC");
 
         textViewPlanName.setText(p_name);
-       // textViewLocationName.setText(l_name);
-       // textViewStartDate.setText(s_date);
-       // textViewEndDate.setText(e_date);
+        textViewLocationName.setText(l_name);
+        textViewStartDate.setText(s_date);
+        textViewEndDate.setText(e_date);
         textViewBudget.setText(stringDoubleBudget);
         txtDescription.setText(p_desc);
     }
