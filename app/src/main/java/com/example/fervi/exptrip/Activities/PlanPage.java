@@ -38,6 +38,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
     private Button btnGoToCreate;
     public Button btnLogout;
     public String cur_email;
+    public static final String MY_PREF_NAME = "MyPrefFile";
     Cursor cursor;
     SQLiteDatabase db;
 
@@ -89,6 +90,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
 
         btnGoToCreate.setOnClickListener(this);
         btnProfile.setOnClickListener(this);
+        btnLogout.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -107,12 +109,13 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
 
     public void logOut()
     {
-        SharedPreferences sharedpreferences = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
+        //SharedPreferences.Editor editor = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE).edit();
+        SharedPreferences settings = getSharedPreferences(MY_PREF_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.remove("CUR_EMAIL");
         editor.clear();
         editor.commit();
-        Intent intent = new Intent(this, LoginPage.class);
-        startActivity(intent);
+        startActivity(new Intent(PlanPage.this, LoginPage.class));
     }
 
     public void ViewProfile()

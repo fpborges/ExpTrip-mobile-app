@@ -125,7 +125,7 @@ public class CreatePlan2 extends AppCompatActivity implements View.OnClickListen
         String startDate = start_date.getText().toString();
         String endDate = end_date.getText().toString();
         String checkBudget = budget.getText().toString();
-        //Double nBudget = Double.parseDouble(budget.getText().toString());
+
 
         try{
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

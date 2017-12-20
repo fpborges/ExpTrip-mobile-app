@@ -75,7 +75,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         else if (databaseHelper.checkUser(txtEmail.getText().toString().trim()
                 , txtPassword.getText().toString().trim())) {
 
-            SharedPreferences.Editor editor = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE).edit();
+            //SharedPreferences.Editor editor = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE).edit();
+            SharedPreferences settings = getSharedPreferences(MY_PREF_NAME, 0);
+            SharedPreferences.Editor editor = settings.edit();
             editor.putString("CUR_EMAIL", userEmail);
             editor.commit();
             txtEmail.setText(null);

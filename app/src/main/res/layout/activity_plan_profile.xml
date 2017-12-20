@@ -6,61 +6,75 @@
     android:layout_height="match_parent"
     tools:context="com.example.fervi.exptrip.Activities.PlanProfile">
 
-    <TextView
+    <EditText
         android:id="@+id/textViewPname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="TextView"
-        tools:ignore="HardcodedText,MissingConstraints"
-        app:layout_constraintRight_toLeftOf="@+id/editTextDesc"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginEnd="14dp"
-        android:layout_marginTop="39dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="14dp" />
-
-    <TextView
-        android:id="@+id/textViewLname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+        android:textSize="12sp"
         tools:ignore="HardcodedText,MissingConstraints"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/textViewPname"
-        android:layout_marginTop="17dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPname"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLname"
+        app:layout_constraintRight_toRightOf="@+id/textViewLname"
+        android:layout_marginTop="16dp"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewPname" />
+        android:layout_marginBottom="11dp"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewLname"
+        app:layout_constraintTop_toTopOf="parent"
+        android:inputType="" />
 
-    <TextView
+    <EditText
+        android:id="@+id/textViewLname"
+        android:layout_width="251dp"
+        android:layout_height="36dp"
+        android:text="TextView"
+        android:textSize="12sp"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextDesc"
+        android:layout_marginTop="65dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="68dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp"
+        android:inputType="" />
+
+    <EditText
         android:id="@+id/textViewSdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="12sp"
         tools:ignore="HardcodedText,MissingConstraints"
         tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/textViewLname"
-        android:layout_marginTop="17dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewLname"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewLname" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:inputType="" />
 
-    <TextView
+    <EditText
         android:id="@+id/textViewEdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="12sp"
         tools:ignore="HardcodedText,MissingConstraints"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="@+id/textViewSdate"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="14dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewSdate"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewSdate" />
+        app:layout_constraintLeft_toLeftOf="@+id/textViewSdate"
+        android:inputType="" />
 
     <EditText
         android:id="@+id/editTextDesc"
@@ -69,25 +83,28 @@
         android:ems="10"
         android:inputType="textMultiLine"
         tools:ignore="MissingConstraints"
-        tools:layout_constraintRight_creator="1"
         android:layout_marginEnd="16dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewLname"
-        tools:layout_constraintBaseline_creator="1"
+        android:layout_marginTop="126dp"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginRight="16dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/textViewPbudget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="12sp"
         tools:ignore="HardcodedText,MissingConstraints"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="@+id/textViewEdate"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewEdate"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewEdate" />
+        app:layout_constraintLeft_toLeftOf="@+id/textViewEdate"
+        android:inputType="" />
 
 </android.support.constraint.ConstraintLayout>

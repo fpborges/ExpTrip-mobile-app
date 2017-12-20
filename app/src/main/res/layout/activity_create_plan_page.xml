@@ -27,12 +27,9 @@
 
     <EditText
         android:id="@+id/txtWhere"
-        android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtPlanName"
-        android:layout_alignStart="@+id/txtPlanName"
-        android:layout_below="@+id/txtPlanName"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="@string/where_do_you_want_to_go"
         android:inputType="textPersonName"
@@ -41,7 +38,10 @@
         app:layout_constraintRight_toLeftOf="@+id/txtMap"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:ignore="RtlCompat" />
+        android:layout_width="500px"
+        tools:ignore="PxUsage,RtlCompat"
+        android:layout_below="@+id/txtPlanName"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:id="@+id/imgMap"
@@ -69,10 +69,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_below="@+id/imgMap"
-        android:layout_alignLeft="@+id/txtWhere"
-        android:layout_alignStart="@+id/txtWhere"
-        android:layout_marginLeft="59dp"
-        android:layout_marginStart="59dp" />
+        android:layout_alignLeft="@+id/btnGoCreate"
+        android:layout_alignStart="@+id/btnGoCreate" />
 
     <Button
         android:id="@+id/btnGoCreate"

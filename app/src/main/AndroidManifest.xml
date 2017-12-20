@@ -55,7 +55,11 @@
             android:name=".Activities.MapPage"
             android:label="@string/title_activity_map_page" />
         <activity android:name=".Activities.CreatePlan3" />
-        <activity android:name=".Activities.PlanProfile"></activity>
+        <activity android:name=".Activities.PlanProfile" />
+        <activity
+            android:name=".Activities.Menu_Activity"
+            android:label="@string/title_activity_menu_"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

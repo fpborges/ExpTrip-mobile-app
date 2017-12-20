@@ -1,0 +1,8 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <item name="ic_menu_profile" type="drawable">@drawable/ic_profile</item>
+    <item name="ic_menu_plans" type="drawable">@drawable/ic_plan</item>
+    <item name="ic_menu_editProfile" type="drawable">@drawable/ic_edit_profile</item>
+    <item name="ic_logoff" type="drawable">@drawable/ic_logoff</item>
+    <item name="ic_menu_share" type="drawable">@android:drawable/ic_menu_share</item>
+    <item name="ic_about" type="drawable">@drawable/ic_about</item>
+</resources>

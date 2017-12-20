@@ -23,11 +23,11 @@ public class PlanProfile extends AppCompatActivity {
         setContentView(R.layout.activity_plan_profile);
         databaseHelper = new DataBaseHelper(this);
 
-        TextView textViewPlanName = (TextView)findViewById(R.id.textViewPname);
-        TextView textViewLocationName= (TextView)findViewById(textViewLname);
-        TextView textViewStartDate = (TextView)findViewById(R.id.textViewSdate);
-        TextView textViewEndDate = (TextView)findViewById(R.id.textViewEdate);
-        TextView textViewBudget = (TextView)findViewById(R.id.textViewPbudget);
+        EditText textViewPlanName = (EditText)findViewById(R.id.textViewPname);
+        EditText textViewLocationName = (EditText)findViewById(textViewLname);
+        EditText textViewStartDate = (EditText)findViewById(R.id.textViewSdate);
+        EditText textViewEndDate = (EditText)findViewById(R.id.textViewEdate);
+        EditText textViewBudget = (EditText)findViewById(R.id.textViewPbudget);
         EditText txtDescription = (EditText)findViewById(R.id.editTextDesc);
 
         Intent intent = getIntent();

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,10 +38,10 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         btnBack = (Button)findViewById(R.id.btnBack);
         btnUpdate = (Button)findViewById(R.id.btnUpdate);
 
-        TextView textViewFirstName = (TextView)findViewById(R.id.textViewName);
-        TextView textViewLastName= (TextView)findViewById(R.id.textViewLastName);
-        TextView textViewCountry = (TextView)findViewById(R.id.textViewCountry);
-        TextView textViewEmail = (TextView)findViewById(R.id.textViewEmail);
+        EditText textViewFirstName = (EditText) findViewById(R.id.textViewName);
+        EditText textViewLastName= (EditText) findViewById(R.id.textViewLastName);
+        EditText textViewCountry = (EditText)findViewById(R.id.textViewCountry);
+        EditText textViewEmail = (EditText) findViewById(R.id.textViewEmail);
 
         Intent intent = getIntent();
 

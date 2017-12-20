@@ -23,7 +23,7 @@
     <string name="enter_your_plan_name">Enter your Plan Name</string>
     <string name="find_a_location">Find a Location</string>
     <string name="when_do_you_want_go">When do you want go?</string>
-    <string name="where_do_you_want_to_go">Where do you go?</string>
+    <string name="where_do_you_want_to_go">Where do you want to go?</string>
     <string name="next">Next</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="create">Create</string>
@@ -36,4 +36,10 @@
     <string name="description_here">Description here</string>
     <string name="retype_your_password">Confirm Password</string>
     <string name="title_activity_profile_page">Profile</string>
+    <string name="title_activity_menu_">Menu_Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
