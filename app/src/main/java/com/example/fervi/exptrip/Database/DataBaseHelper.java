@@ -10,7 +10,6 @@ package com.example.fervi.exptrip.Database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.fervi.exptrip.Model.user;
@@ -206,6 +205,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    //pass parameter to open specific list for each user
     public Cursor getPlanList()
     {
         SQLiteDatabase db = this.getWritableDatabase();

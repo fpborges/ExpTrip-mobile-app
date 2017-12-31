@@ -20,10 +20,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.fervi.exptrip.Database.DataBaseHelper;
 import com.example.fervi.exptrip.R;
-
 import java.util.ArrayList;
 
 import static com.example.fervi.exptrip.Activities.LoginPage.MY_PREF_NAME;
@@ -48,7 +46,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_page);
 
-        ListView listView = (ListView) findViewById(R.id.planList);
+        final ListView listView = (ListView) findViewById(R.id.planList);
 
         databaseHelper = new DataBaseHelper(activity);
         db = databaseHelper.getReadableDatabase();
@@ -67,6 +65,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
 
         ArrayList<String> plan_list = new ArrayList<>();
         Cursor planData = databaseHelper.getPlanList();
+
         if(planData.getCount() == 0)
         {
             Toast.makeText(this, "Create a plan", Toast.LENGTH_LONG).show();
@@ -75,14 +74,14 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
             while(planData.moveToNext())
             {
                 plan_list.add(planData.getString(1));
-                ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,plan_list);
+                final ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,plan_list);
                 listView.setAdapter(listAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if(position == 0){
-                            ViewPlanProfile();
-                        }
+                       String item = (String) parent.getItemAtPosition(position);
+
+                        ViewPlanProfile(item);
                     }
                 });
             }
@@ -142,15 +141,23 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-    public void ViewPlanProfile()
-    {
-        cursor = db.rawQuery("SELECT * FROM " +
-                DataBaseHelper.TABLE_USER +" a " + "INNER JOIN " + DataBaseHelper.TABLE_PLAN + " b " +
-                " ON "+ "a."+DataBaseHelper.COLUMN_USER_ID +" = " +"b."+DataBaseHelper.COLUMN_PLAN_ID +
-                " INNER JOIN " + DataBaseHelper.TABLE_LOCATION + " c " +
-                " ON "+ "c."+DataBaseHelper.COLUMN_LOCATION_ID +" = " +"b."+DataBaseHelper.COLUMN_PLAN_ID
-                + " WHERE "+ DataBaseHelper.COLUMN_EMAIL+"=? ", new String[]{cur_email});
 
+    public void ViewPlanProfile(String cur_plan_name)
+    {
+        //the problem is on the user column
+        /*cursor = db.rawQuery("SELECT * FROM " +
+                DataBaseHelper.TABLE_USER +" a " + "JOIN " + DataBaseHelper.TABLE_PLAN + " b" +
+                " ON "+ "a."+DataBaseHelper.COLUMN_USER_ID +" = " +"b."+DataBaseHelper.COLUMN_PLAN_ID +
+                " JOIN " + DataBaseHelper.TABLE_LOCATION + " c" +
+                " ON "+ "c."+DataBaseHelper.COLUMN_LOCATION_ID +" = " +"b."+DataBaseHelper.COLUMN_PLAN_ID
+                + " WHERE "+ DataBaseHelper.COLUMN_PLAN_NAME+" ='"+cur_plan_name+"'", null);
+                //+ " WHERE "+ DataBaseHelper.COLUMN_EMAIL+"=? ", new String[]{cur_email});*/
+
+        cursor = db.rawQuery("SELECT * FROM " +
+                DataBaseHelper.TABLE_PLAN + " b" +
+                " JOIN " + DataBaseHelper.TABLE_LOCATION + " c" +
+                " ON "+ "c."+DataBaseHelper.COLUMN_LOCATION_ID +" = " +"b."+DataBaseHelper.COLUMN_PLAN_ID
+                + " WHERE "+ DataBaseHelper.COLUMN_PLAN_NAME+" ='"+cur_plan_name+"'", null);
 
         if(cursor != null)
         {
@@ -170,6 +177,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
                 intent.putExtra("E_DATE", peDate);
                 intent.putExtra("P_BUDGET", pBudget);
                 intent.putExtra("P_DESC", pDesc);
+                Toast.makeText(this, cur_plan_name, Toast.LENGTH_LONG).show();
                 startActivity(intent);
                 finish();
             }

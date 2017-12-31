@@ -3,7 +3,10 @@ package com.example.fervi.exptrip.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.fervi.exptrip.Database.DataBaseHelper;
@@ -13,15 +16,21 @@ import static com.example.fervi.exptrip.R.id.textViewLastName;
 import static com.example.fervi.exptrip.R.id.textViewLname;
 import static com.example.fervi.exptrip.R.id.textViewLocation;
 
-public class PlanProfile extends AppCompatActivity {
+public class PlanProfile extends AppCompatActivity implements View.OnClickListener{
 
     DataBaseHelper databaseHelper;
+
+    private ImageButton btnBackP;
+    private TextView txtPlanUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_profile);
         databaseHelper = new DataBaseHelper(this);
+
+        btnBackP = (ImageButton)findViewById(R.id.btnBackP);
+        txtPlanUpdate = (TextView) findViewById(R.id.txtPlanUpdate);
 
         EditText textViewPlanName = (EditText)findViewById(R.id.textViewPname);
         EditText textViewLocationName = (EditText)findViewById(textViewLname);
@@ -45,5 +54,19 @@ public class PlanProfile extends AppCompatActivity {
         textViewEndDate.setText(e_date);
         textViewBudget.setText(stringDoubleBudget);
         txtDescription.setText(p_desc);
+
+        btnBackP.setOnClickListener(this);
+        txtPlanUpdate.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnBackP:
+                startActivity(new Intent(this, PlanPage.class));
+                break;
+            case R.id.txtPlanUpdate:
+                break;
+        }
     }
 }
