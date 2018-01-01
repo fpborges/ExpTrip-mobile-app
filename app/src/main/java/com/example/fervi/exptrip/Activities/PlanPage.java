@@ -21,10 +21,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.fervi.exptrip.Database.DataBaseHelper;
+import com.example.fervi.exptrip.Model.plan;
 import com.example.fervi.exptrip.R;
 import java.util.ArrayList;
-
 import static com.example.fervi.exptrip.Activities.LoginPage.MY_PREF_NAME;
+import static com.example.fervi.exptrip.Database.DataBaseHelper.TABLE_PLAN;
 
 public class PlanPage extends AppCompatActivity implements View.OnClickListener {
 
@@ -64,7 +65,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
         //textViewFirstName.setText(cur_email);
 
         ArrayList<String> plan_list = new ArrayList<>();
-        Cursor planData = databaseHelper.getPlanList();
+        Cursor planData = databaseHelper.getPlanList(cur_email);
 
         if(planData.getCount() == 0)
         {
@@ -113,7 +114,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
         SharedPreferences.Editor editor = settings.edit();
         editor.remove("CUR_EMAIL");
         editor.clear();
-        editor.commit();
+        editor.apply();
         startActivity(new Intent(PlanPage.this, LoginPage.class));
     }
 
@@ -154,7 +155,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
                 //+ " WHERE "+ DataBaseHelper.COLUMN_EMAIL+"=? ", new String[]{cur_email});*/
 
         cursor = db.rawQuery("SELECT * FROM " +
-                DataBaseHelper.TABLE_PLAN + " b" +
+                TABLE_PLAN + " b" +
                 " JOIN " + DataBaseHelper.TABLE_LOCATION + " c" +
                 " ON "+ "c."+DataBaseHelper.COLUMN_LOCATION_ID +" = " +"b."+DataBaseHelper.COLUMN_PLAN_ID
                 + " WHERE "+ DataBaseHelper.COLUMN_PLAN_NAME+" ='"+cur_plan_name+"'", null);

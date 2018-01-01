@@ -9,6 +9,7 @@ package com.example.fervi.exptrip.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -16,7 +17,12 @@ import com.example.fervi.exptrip.Model.user;
 import com.example.fervi.exptrip.Model.plan;
 import com.example.fervi.exptrip.Model.location;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class DataBaseHelper extends SQLiteOpenHelper {
+
+    public String cur_email;
+    public static final String MY_PREF_NAME = "MyPrefFile";
 
     //Database
     public static final int DATABASE_VERSION = 1;
@@ -106,6 +112,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_PLAN);
         db.execSQL(CREATE_TABLE_LOCATION);
         db.execSQL(CREATE_TABLE_PLAN_LOCATION);
+
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
@@ -129,6 +136,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_USER, null, values);
         db.close();
+    }
+
+    public void updateUser(user user)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_FIRST_NAME, user.getFirst_name());
+        contentValues.put(COLUMN_LAST_NAME, user.getLast_name());
+        contentValues.put(COLUMN_COUNTRY, user.getCountry());
+        contentValues.put(COLUMN_EMAIL, user.getEmail());
+        contentValues.put(COLUMN_PASSWORD, user.getPassword());
+        String whereClause = COLUMN_EMAIL+"=? ";
+        String whereArgs[] = {user.getEmail().toString()};
+        db.update(TABLE_USER, contentValues, whereClause,whereArgs);
+    }
+
+    public void deleteUser(user user)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_EMAIL+"=? ";
+        String whereArgs[] = {user.getEmail().toString()};
+        db.delete(TABLE_USER, whereClause,whereArgs);
     }
 
     public void addPlan(plan plan)
@@ -206,10 +235,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     //pass parameter to open specific list for each user
-    public Cursor getPlanList()
+    public Cursor getPlanList(String u_email)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor planData = db.rawQuery("SELECT * FROM "+ TABLE_PLAN, null);
+        Cursor planData = db.rawQuery("SELECT * FROM "+ TABLE_PLAN, null);/* + " b" +
+                " JOIN " + DataBaseHelper.TABLE_USER + " c" +
+                " ON "+ "c."+DataBaseHelper.COLUMN_USER_ID +" = " +"b."+DataBaseHelper.COLUMN_USER_ID
+                + " WHERE "+ DataBaseHelper.COLUMN_EMAIL+" ='"+u_email+"'", null);*/
         return planData;
     }
     public Cursor getLocation()

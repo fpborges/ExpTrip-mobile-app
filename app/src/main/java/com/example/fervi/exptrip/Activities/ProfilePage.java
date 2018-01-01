@@ -1,10 +1,7 @@
 package com.example.fervi.exptrip.Activities;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,21 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.fervi.exptrip.Database.DataBaseHelper;
 import com.example.fervi.exptrip.Model.user;
+import com.example.fervi.exptrip.Database.DataBaseHelper;
 import com.example.fervi.exptrip.R;
 
-import static com.example.fervi.exptrip.Database.DataBaseHelper.COLUMN_COUNTRY;
-import static com.example.fervi.exptrip.Database.DataBaseHelper.COLUMN_EMAIL;
-import static com.example.fervi.exptrip.Database.DataBaseHelper.COLUMN_FIRST_NAME;
-import static com.example.fervi.exptrip.Database.DataBaseHelper.COLUMN_LAST_NAME;
-import static com.example.fervi.exptrip.Database.DataBaseHelper.COLUMN_PASSWORD;
 
 
 public class ProfilePage extends AppCompatActivity implements View.OnClickListener{
 
-
+    private final AppCompatActivity activity = ProfilePage.this;
     DataBaseHelper databaseHelper;
     public EditText textViewFirstName;
     public EditText textViewLastName;
@@ -36,9 +27,8 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
     private Button btnBack;
     private Button btnUpdate;
     private Button btnDelete;
-    public String current_email;
-    public static final String MY_PREF_NAME = "UserEmail";
-    SQLiteDatabase db;
+    private user user;
+
 
 
     @Override
@@ -46,7 +36,6 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
 
-        databaseHelper = new DataBaseHelper(this);
 
         btnBack = (Button)findViewById(R.id.btnBack);
         btnUpdate = (Button)findViewById(R.id.btnUpdate);
@@ -57,10 +46,6 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         textViewCountry = (EditText)findViewById(R.id.textViewCountry);
         textViewEmail = (EditText) findViewById(R.id.textViewEmail);
         textViewPassword = (EditText) findViewById(R.id.textViewPassword);
-
-        //USING SHARED PREFERENCES TO RETRIEVE THE EMAIL:
-        SharedPreferences prefs = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE);
-        current_email = prefs.getString("CUR_EMAIL", "No name defined");//"No name defined" is the default value.
 
         Intent intent = getIntent();
 
@@ -79,12 +64,15 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         btnUpdate.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
 
+        databaseHelper = new DataBaseHelper(activity);
+        user = new user();
+
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnUpdate:
-                updateUser();
+                updateProfile();
                 Toast.makeText(this, "User Updated", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(ProfilePage.this, PlanPage.class));
                 break;
@@ -94,6 +82,7 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
             case R.id.btnDelete:
                 AlertDialog diaBox = AskForDelete();
                 diaBox.show();
+
                 break;
         }
     }
@@ -107,9 +96,9 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        db.delete(DataBaseHelper.TABLE_USER , COLUMN_EMAIL+"=? ",
-                                new String[]{current_email});
+                        deleteProfile();
                         dialog.dismiss();
+                        startActivity(new Intent(ProfilePage.this, LoginPage.class));
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -121,15 +110,19 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         return myQuittingDialogBox;
     }
 
-    public void updateUser()
+    public void deleteProfile()
     {
-        ContentValues data = new ContentValues();
-        data.put(COLUMN_FIRST_NAME, textViewFirstName.toString().trim());
-        data.put(COLUMN_LAST_NAME, textViewLastName.toString().trim());
-        data.put(COLUMN_COUNTRY, textViewCountry.toString().trim());
-        data.put(COLUMN_EMAIL, textViewEmail.toString().trim());
-        data.put(COLUMN_PASSWORD, textViewPassword.toString().trim());
-        db.update(DataBaseHelper.TABLE_USER, data, COLUMN_EMAIL+"=? ",
-                new String[]{current_email});
+        user.setEmail(textViewEmail.getText().toString().trim());
+        databaseHelper.deleteUser(user);
+    }
+    public void updateProfile()
+    {
+        user.setFirst_name(textViewFirstName.getText().toString().trim());
+        user.setLast_name(textViewLastName.getText().toString().trim());
+        user.setCountry(textViewCountry.getText().toString().trim());
+        user.setEmail(textViewEmail.getText().toString().trim());
+        user.setPassword(textViewPassword.getText().toString().trim());
+
+        databaseHelper.updateUser(user);
     }
 }

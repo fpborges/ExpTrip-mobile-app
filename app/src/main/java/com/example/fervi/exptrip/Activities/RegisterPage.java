@@ -57,7 +57,6 @@ public class RegisterPage extends AppCompatActivity implements View.OnClickListe
         user = new user();
     }
 
-
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnRegister:
