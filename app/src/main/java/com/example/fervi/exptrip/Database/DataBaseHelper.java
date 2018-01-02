@@ -17,6 +17,8 @@ import com.example.fervi.exptrip.Model.user;
 import com.example.fervi.exptrip.Model.plan;
 import com.example.fervi.exptrip.Model.location;
 
+import java.util.List;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -135,6 +137,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_PASSWORD, user.getPassword());
 
         db.insert(TABLE_USER, null, values);
+
+
+
         db.close();
     }
 
@@ -167,6 +172,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_PLAN_NAME, plan.getPlan_name());
         values.put(COLUMN_BUDGET, plan.getBudget());
         values.put(COLUMN_DESCRIPTION, plan.getDescription());
+        values.put(COLUMN_USER_ID, plan.getUserid());
 
         db.insert(TABLE_PLAN, null, values);
         db.close();

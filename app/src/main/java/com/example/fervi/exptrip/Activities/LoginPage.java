@@ -29,7 +29,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private Button btnSignIn;
     private TextView txtReg;
     private DataBaseHelper databaseHelper;
-    public static final String MY_PREF_NAME = "MyPrefFile";
+    public static final String MY_PREF_NAME = "MyProfile";
 
 
     @Override

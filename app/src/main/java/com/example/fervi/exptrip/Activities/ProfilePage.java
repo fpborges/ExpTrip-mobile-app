@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.fervi.exptrip.Model.user;
 import com.example.fervi.exptrip.Database.DataBaseHelper;
@@ -28,6 +29,7 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
     private Button btnUpdate;
     private Button btnDelete;
     private user user;
+    public TextView userid_text;
 
 
 
@@ -46,6 +48,7 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         textViewCountry = (EditText)findViewById(R.id.textViewCountry);
         textViewEmail = (EditText) findViewById(R.id.textViewEmail);
         textViewPassword = (EditText) findViewById(R.id.textViewPassword);
+        userid_text = (TextView) findViewById(R.id.textUserId);
 
         Intent intent = getIntent();
 
@@ -53,12 +56,14 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
         String last_name = intent.getStringExtra("L_NAME");
         String country = intent.getStringExtra("U_COUNTRY");
         String user_email = intent.getStringExtra("U_EMAIL");
+        String user_id = intent.getStringExtra("U_ID");
 
 
         textViewFirstName.setText(first_name);
         textViewLastName.setText(last_name);
         textViewCountry.setText(country);
         textViewEmail.setText(user_email);
+        userid_text.setText(user_id);
 
         btnBack.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);

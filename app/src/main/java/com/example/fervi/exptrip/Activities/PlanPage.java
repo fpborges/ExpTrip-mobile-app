@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,7 +38,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
     private Button btnGoToCreate;
     public Button btnLogout;
     public String cur_email;
-    public static final String MY_PREF_NAME = "MyPrefFile";
+    public static final String MY_PREF_NAME = "MyProfile";
     Cursor cursor;
     SQLiteDatabase db;
 
@@ -59,8 +60,8 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
         textViewFirstName = (TextView)findViewById(R.id.welcomeUser);
 
         //USING SHARED PREFERENCES TO RETRIEVE THE EMAIL:
-        SharedPreferences prefs = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE);
-        cur_email = prefs.getString("CUR_EMAIL", "No name defined");//"No name defined" is the default value.
+        //SharedPreferences prefs = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE);
+        //cur_email = prefs.getString("CUR_EMAIL", "No name defined");//"No name defined" is the default value.
 
         //textViewFirstName.setText(cur_email);
 
@@ -120,6 +121,9 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
 
     public void ViewProfile()
     {
+        SharedPreferences prefs = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE);
+        cur_email = prefs.getString("CUR_EMAIL", "No name defined");//"No name defined" is the default value.
+
         cursor = db.rawQuery("SELECT * FROM " + DataBaseHelper.TABLE_USER
                 + " WHERE "+ DataBaseHelper.COLUMN_EMAIL+"=? ", new String[]{cur_email});
         if(cursor != null)
@@ -127,11 +131,13 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
             if(cursor.getCount() > 0)
             {
                 cursor.moveToFirst();
+                Integer uId = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.COLUMN_USER_ID));
                 String fName = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_FIRST_NAME));
                 String lName = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_LAST_NAME));
                 String uCountry = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_COUNTRY));
                 String uEmail = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_EMAIL));
                 Intent intent = new Intent(PlanPage.this, ProfilePage.class);
+                intent.putExtra("U_ID", uId);
                 intent.putExtra("F_NAME", fName);
                 intent.putExtra("L_NAME", lName);
                 intent.putExtra("U_COUNTRY", uCountry);
@@ -145,15 +151,6 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
 
     public void ViewPlanProfile(String cur_plan_name)
     {
-        //the problem is on the user column
-        /*cursor = db.rawQuery("SELECT * FROM " +
-                DataBaseHelper.TABLE_USER +" a " + "JOIN " + DataBaseHelper.TABLE_PLAN + " b" +
-                " ON "+ "a."+DataBaseHelper.COLUMN_USER_ID +" = " +"b."+DataBaseHelper.COLUMN_PLAN_ID +
-                " JOIN " + DataBaseHelper.TABLE_LOCATION + " c" +
-                " ON "+ "c."+DataBaseHelper.COLUMN_LOCATION_ID +" = " +"b."+DataBaseHelper.COLUMN_PLAN_ID
-                + " WHERE "+ DataBaseHelper.COLUMN_PLAN_NAME+" ='"+cur_plan_name+"'", null);
-                //+ " WHERE "+ DataBaseHelper.COLUMN_EMAIL+"=? ", new String[]{cur_email});*/
-
         cursor = db.rawQuery("SELECT * FROM " +
                 TABLE_PLAN + " b" +
                 " JOIN " + DataBaseHelper.TABLE_LOCATION + " c" +
