@@ -61,7 +61,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //Create user table
     public String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER +
-            " (" + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " (" + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
             COLUMN_FIRST_NAME + " TEXT," +
             COLUMN_LAST_NAME + " TEXT," +
             COLUMN_COUNTRY + " TEXT," +
@@ -72,7 +72,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //create plan table
     public String CREATE_TABLE_PLAN = "CREATE TABLE " + TABLE_PLAN +
-            " (" + COLUMN_PLAN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " (" + COLUMN_PLAN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
             COLUMN_PLAN_NAME + " TEXT," +
             COLUMN_BUDGET + " DOUBLE," +
             COLUMN_DESCRIPTION + " TEXT," +
@@ -83,7 +83,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //create location table
     public String CREATE_TABLE_LOCATION = "CREATE TABLE " + TABLE_LOCATION +
-            " (" + COLUMN_LOCATION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " (" + COLUMN_LOCATION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
             COLUMN_LOCATION_NAME + " TEXT," +
             COLUMN_START_DATE + " TEXT," +
             COLUMN_END_DATE + " TEXT" + ")";
@@ -139,7 +139,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_USER, null, values);
 
 
-
         db.close();
     }
 
@@ -178,6 +177,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updatePlan(plan plan)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_PLAN_NAME, plan.getPlan_name());
+        contentValues.put(COLUMN_BUDGET, plan.getBudget());
+        contentValues.put(COLUMN_DESCRIPTION, plan.getDescription());
+        String whereClause = COLUMN_PLAN_NAME+"=? ";
+        String whereArgs[] = {plan.getPlan_name().toString()};
+        db.update(TABLE_PLAN, contentValues, whereClause,whereArgs);
+    }
+
+    public void deletePlan(plan plan)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_PLAN_NAME+"=? ";
+        String whereArgs[] = {plan.getPlan_name().toString()};
+        db.delete(TABLE_PLAN, whereClause,whereArgs);
+    }
+
     public void addLocation(location location)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -185,9 +204,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_LOCATION_NAME, location.getLocation_name());
         values.put(COLUMN_START_DATE, location.getStart_date());
         values.put(COLUMN_END_DATE, location.getEnd_date());
-
         db.insert(TABLE_LOCATION, null, values);
         db.close();
+    }
+
+    public void updateLocation(location location)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_LOCATION_NAME, location.getLocation_name());
+        contentValues.put(COLUMN_START_DATE, location.getStart_date());
+        contentValues.put(COLUMN_END_DATE, location.getEnd_date());
+        String whereClause = COLUMN_LOCATION_NAME+"=? ";
+        String whereArgs[] = {location.getLocation_name().toString()};
+        db.update(TABLE_LOCATION, contentValues, whereClause,whereArgs);
     }
 
     //check If email already exist
@@ -244,10 +274,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Cursor getPlanList(String u_email)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor planData = db.rawQuery("SELECT * FROM "+ TABLE_PLAN, null);/* + " b" +
-                " JOIN " + DataBaseHelper.TABLE_USER + " c" +
-                " ON "+ "c."+DataBaseHelper.COLUMN_USER_ID +" = " +"b."+DataBaseHelper.COLUMN_USER_ID
-                + " WHERE "+ DataBaseHelper.COLUMN_EMAIL+" ='"+u_email+"'", null);*/
+        Cursor planData = db.rawQuery("SELECT * FROM "+ TABLE_PLAN + " b" +
+                " JOIN " + TABLE_USER + " c" +
+                " ON "+ "c."+COLUMN_USER_ID +" = " +"b."+COLUMN_USER_ID
+                + " WHERE "+ COLUMN_EMAIL+" ='"+u_email+"'", null);
+
         return planData;
     }
     public Cursor getLocation()

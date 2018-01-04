@@ -7,6 +7,7 @@
 package com.example.fervi.exptrip.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +19,10 @@ import android.widget.Toast;
 import com.example.fervi.exptrip.Database.DataBaseHelper;
 import com.example.fervi.exptrip.Model.plan;
 import com.example.fervi.exptrip.Model.location;
+import com.example.fervi.exptrip.Model.user;
 import com.example.fervi.exptrip.R;
+
+import static com.example.fervi.exptrip.Activities.PlanPage.CUR_UID;
 
 
 public class CreatePlan3 extends AppCompatActivity implements View.OnClickListener {
@@ -94,12 +98,16 @@ public class CreatePlan3 extends AppCompatActivity implements View.OnClickListen
 
     public void creatingPlan()
     {
+        SharedPreferences prefs = getSharedPreferences(CUR_UID, MODE_PRIVATE);
+        Integer cur_userid = prefs.getInt("CUR_UID", 0);//"0 is the default value.
+
         String tDescription = txtDescription.getText().toString().trim();
 
         //saving in database
             plan.setPlan_name(nameOfPlan);
             plan.setBudget(budgetOfPlan);
             plan.setDescription(tDescription);
+            plan.setUserid(cur_userid);
             databaseHelper.addPlan(plan);
 
             location.setLocation_name(nameOfLocation);

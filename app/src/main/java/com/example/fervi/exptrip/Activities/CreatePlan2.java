@@ -128,7 +128,7 @@ public class CreatePlan2 extends AppCompatActivity implements View.OnClickListen
 
 
         try{
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
             Date date1 = formatter.parse(startDate);
             Date date2 = formatter.parse(endDate);
@@ -137,15 +137,15 @@ public class CreatePlan2 extends AppCompatActivity implements View.OnClickListen
             {
                 Toast.makeText(this, "Please enter all fields above", Toast.LENGTH_LONG).show();
             }
-            else if (date2.compareTo(date1)<0)
+            else if (date2.before(date1))
             {
                 Toast.makeText(this, "End date must be higher than start date", Toast.LENGTH_LONG).show();
             }
             else
             {
                 Double nBudget = Double.parseDouble(budget.getText().toString());
-            // first parameter is the context, second is the class of the activity to launch
-            Intent planName2 = new Intent(CreatePlan2.this, CreatePlan3.class);
+            //first parameter is the context, second is the class of the activity to launch
+                Intent planName2 = new Intent(CreatePlan2.this, CreatePlan3.class);
                 planName2.putExtra("PLAN_NAME_AC1", plan_Name);
                 planName2.putExtra("LOC_NAME_AC1", location_Name);
                 planName2.putExtra("START_DATE", startDate.trim());

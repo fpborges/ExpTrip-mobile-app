@@ -58,23 +58,6 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
-    <TextView
-        android:id="@+id/welcomeUser"
-        android:layout_width="226dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="31dp"
-        android:layout_marginTop="44dp"
-        android:padding="16dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/yourPlans"
-        app:layout_constraintLeft_toLeftOf="@+id/btnGoCreate"
-        app:layout_constraintTop_toTopOf="@+id/btnGoCreate"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded,SmallSp"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
-
     <Button
         android:id="@+id/btnProfile"
         android:layout_width="88dp"
@@ -103,6 +86,21 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
+
+    <TextView
+        android:id="@+id/textContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact us"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/yourPlans"
+        android:layout_marginStart="29dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/yourPlans"
+        android:layout_marginLeft="29dp" />
 
     <!--<android.support.design.widget.NavigationView
         android:id="@+id/navigation"

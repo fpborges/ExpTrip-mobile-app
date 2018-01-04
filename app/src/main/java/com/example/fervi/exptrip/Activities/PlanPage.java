@@ -32,13 +32,14 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
 
     private final AppCompatActivity activity = PlanPage.this;
 
-    private TextView textViewFirstName;
     private DataBaseHelper databaseHelper;
     private Button btnProfile;
     private Button btnGoToCreate;
     public Button btnLogout;
     public String cur_email;
+    private TextView contactUs;
     public static final String MY_PREF_NAME = "MyProfile";
+    public static final String CUR_UID = "uid";
     Cursor cursor;
     SQLiteDatabase db;
 
@@ -56,12 +57,12 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
         btnProfile = (Button)findViewById(R.id.btnProfile);
         btnGoToCreate = (Button)findViewById(R.id.btnGoCreate);
         btnLogout = (Button)findViewById(R.id.btnLogout);
+        contactUs = (TextView)findViewById(R.id.textContact);
 
-        textViewFirstName = (TextView)findViewById(R.id.welcomeUser);
 
         //USING SHARED PREFERENCES TO RETRIEVE THE EMAIL:
-        //SharedPreferences prefs = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE);
-        //cur_email = prefs.getString("CUR_EMAIL", "No name defined");//"No name defined" is the default value.
+        SharedPreferences prefs = getSharedPreferences(MY_PREF_NAME, MODE_PRIVATE);
+        cur_email = prefs.getString("CUR_EMAIL", "No name defined");//"No name defined" is the default value.
 
         //textViewFirstName.setText(cur_email);
 
@@ -76,7 +77,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
             while(planData.moveToNext())
             {
                 plan_list.add(planData.getString(1));
-                final ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,plan_list);
+                ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,plan_list);
                 listView.setAdapter(listAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -92,6 +93,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
         btnGoToCreate.setOnClickListener(this);
         btnProfile.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
+        contactUs.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -104,6 +106,9 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
                 break;
             case R.id.btnLogout:
                 logOut();
+                break;
+            case R.id.textContact:
+                SendEmail();
                 break;
         }
     }
@@ -132,6 +137,10 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
             {
                 cursor.moveToFirst();
                 Integer uId = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.COLUMN_USER_ID));
+                SharedPreferences settings = getSharedPreferences(CUR_UID, 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putInt("CUR_UID", uId);
+                editor.commit();
                 String fName = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_FIRST_NAME));
                 String lName = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_LAST_NAME));
                 String uCountry = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_COUNTRY));
@@ -147,7 +156,6 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
             }
         }
     }
-
 
     public void ViewPlanProfile(String cur_plan_name)
     {
@@ -168,6 +176,7 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
                 String peDate = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_END_DATE));
                 Double pBudget = cursor.getDouble(cursor.getColumnIndex(DataBaseHelper.COLUMN_BUDGET));
                 String pDesc = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COLUMN_DESCRIPTION));
+                Integer uId = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.COLUMN_USER_ID));
                 Intent intent = new Intent(PlanPage.this, PlanProfile.class);
                 intent.putExtra("P_NAME", pName);
                 intent.putExtra("P_LOCATION", pLocation);
@@ -175,10 +184,21 @@ public class PlanPage extends AppCompatActivity implements View.OnClickListener 
                 intent.putExtra("E_DATE", peDate);
                 intent.putExtra("P_BUDGET", pBudget);
                 intent.putExtra("P_DESC", pDesc);
+                intent.putExtra("U_ID", uId);
                 Toast.makeText(this, cur_plan_name, Toast.LENGTH_LONG).show();
                 startActivity(intent);
                 finish();
             }
         }
     }
+    //Send Email
+    public void SendEmail()
+    {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        emailIntent.setType("PLAIN/TEXT");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"fborges8262@conestogac.on.ca"}); // recipients
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Email subject");
+        startActivity(emailIntent);
+    }
+
 }

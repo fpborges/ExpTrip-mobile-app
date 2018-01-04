@@ -47,6 +47,8 @@ public class PlanProfile extends AppCompatActivity implements View.OnClickListen
         String e_date = intent.getStringExtra("E_DATE");
         String stringDoubleBudget= Double.toString(getIntent().getDoubleExtra("P_BUDGET", 0));
         String p_desc = intent.getStringExtra("P_DESC");
+        String stringIntegerId= Integer.toString(getIntent().getIntExtra("U_ID",0));
+
 
         textViewPlanName.setText(p_name);
         textViewLocationName.setText(l_name);
