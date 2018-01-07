@@ -30,7 +30,8 @@ public class CreatePlan3 extends AppCompatActivity implements View.OnClickListen
     private final AppCompatActivity activity = CreatePlan3.this;
 
     private String nameOfPlan;
-    private String nameOfLocation;
+    //private String nameOfLocation;
+    private String nameOfCity;
     private String startDateOfPlan;
     private String endDateOfPlan;
     private Double budgetOfPlan;
@@ -56,7 +57,8 @@ public class CreatePlan3 extends AppCompatActivity implements View.OnClickListen
 
         //Create variables to get all information from activities to save on database
         nameOfPlan = getIntent().getStringExtra("PLAN_NAME_AC1");
-        nameOfLocation = getIntent().getStringExtra("LOC_NAME_AC1");
+       // nameOfLocation = getIntent().getStringExtra("LOC_NAME_AC1");
+        nameOfCity = getIntent().getStringExtra("CITY_NAME_AC1");
         startDateOfPlan = getIntent().getStringExtra("START_DATE");
         endDateOfPlan = getIntent().getStringExtra("END_DATE");
         budgetOfPlan = getIntent().getDoubleExtra("BUDGET", 0);
@@ -72,7 +74,7 @@ public class CreatePlan3 extends AppCompatActivity implements View.OnClickListen
 
 
         planName.setText(getIntent().getStringExtra("PLAN_NAME_AC1"));
-        locationName.setText(getIntent().getExtras().getString("LOC_NAME_AC1"));
+        locationName.setText(getIntent().getExtras().getString("CITY_NAME_AC1"));
         startDate.setText(getIntent().getStringExtra("START_DATE"));
         endDate.setText(getIntent().getExtras().getString("END_DATE"));
 
@@ -110,7 +112,7 @@ public class CreatePlan3 extends AppCompatActivity implements View.OnClickListen
             plan.setUserid(cur_userid);
             databaseHelper.addPlan(plan);
 
-            location.setLocation_name(nameOfLocation);
+            location.setLocation_name(nameOfCity);
             location.setStart_date(startDateOfPlan);
             location.setEnd_date(endDateOfPlan);
             databaseHelper.addLocation(location);

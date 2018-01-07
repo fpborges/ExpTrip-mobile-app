@@ -25,29 +25,13 @@
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
 
-    <EditText
-        android:id="@+id/txtWhere"
 
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:hint="@string/where_do_you_want_to_go"
-        android:inputType="textPersonName"
-        android:textAlignment="textStart"
-        app:layout_constraintBottom_toTopOf="@+id/txtMap"
-        app:layout_constraintRight_toLeftOf="@+id/txtMap"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_width="500px"
-        tools:ignore="PxUsage,RtlCompat"
-        android:layout_below="@+id/txtPlanName"
-        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:id="@+id/imgMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtWhere"
+        android:layout_below="@+id/place_autocomplete_fragment"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:contentDescription=""
@@ -70,6 +54,28 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_below="@+id/imgMap"
         android:layout_centerHorizontal="true" />
+
+
+    <fragment
+        android:id="@+id/place_autocomplete_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="17dp"
+        android:hint="@string/where_do_you_want_to_go"
+        android:inputType="textPersonName"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/txtMap"
+        app:layout_constraintRight_toLeftOf="@+id/txtMap"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintRight_creator="1"
+
+        android:layout_below="@+id/txtPlanName"
+        android:layout_centerHorizontal="true"
+
+
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        tools:ignore="PxUsage" />
 
     <Button
         android:id="@+id/btnGoCreate"
