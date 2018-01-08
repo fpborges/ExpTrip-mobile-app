@@ -16,17 +16,18 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/textViewLname"
-        app:layout_constraintRight_toRightOf="@+id/textViewLname"
+        app:layout_constraintBottom_toTopOf="@+id/place_autocomplete_fragment"
+        app:layout_constraintRight_toRightOf="@+id/place_autocomplete_fragment"
         android:layout_marginTop="16dp"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="11dp"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewLname"
+        app:layout_constraintLeft_toLeftOf="@+id/place_autocomplete_fragment"
         app:layout_constraintTop_toTopOf="parent"
         android:inputType="" />
 
-    <EditText
-        android:id="@+id/textViewLname"
+
+    <fragment
+        android:id="@+id/place_autocomplete_fragment"
         android:layout_width="251dp"
         android:layout_height="36dp"
         android:text="TextView"
@@ -36,13 +37,15 @@
         tools:layout_constraintBottom_creator="1"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/editTextDesc"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="71dp"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="73dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="16dp"
-        android:inputType="" />
+        android:inputType=""
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment" />
+
 
     <EditText
         android:id="@+id/textViewSdate"
@@ -51,14 +54,14 @@
         android:text="TextView"
         android:textSize="12sp"
         tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_constraintTop_creator="1"
         android:layout_marginStart="16dp"
+        android:inputType=""
+        tools:layout_constraintTop_creator="1"
         android:layout_marginTop="18dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLname"
+        app:layout_constraintTop_toBottomOf="@+id/place_autocomplete_fragment"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp"
-        android:inputType="" />
+        android:layout_marginLeft="16dp" />
 
     <EditText
         android:id="@+id/textViewEdate"
@@ -70,11 +73,12 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="@+id/textViewSdate"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="19dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewSdate"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/textViewSdate"
-        android:inputType="" />
+        android:inputType=""
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
         android:id="@+id/editTextDesc"
@@ -87,7 +91,7 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="126dp"
+        android:layout_marginTop="137dp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginRight="16dp" />
 
@@ -101,11 +105,12 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="@+id/textViewEdate"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="21dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewEdate"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/textViewEdate"
-        android:inputType="" />
+        android:inputType=""
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <ImageButton
         android:id="@+id/btnBackP"

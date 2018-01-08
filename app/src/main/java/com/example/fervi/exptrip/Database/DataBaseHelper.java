@@ -184,8 +184,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COLUMN_PLAN_NAME, plan.getPlan_name());
         contentValues.put(COLUMN_BUDGET, plan.getBudget());
         contentValues.put(COLUMN_DESCRIPTION, plan.getDescription());
-        String whereClause = COLUMN_PLAN_NAME+"=? ";
-        String whereArgs[] = {plan.getPlan_name().toString()};
+
+        String whereClause = COLUMN_PLAN_ID+"=? ";
+        String whereArgs[] = {String.valueOf(plan.getPlanid())};
         db.update(TABLE_PLAN, contentValues, whereClause,whereArgs);
     }
 
@@ -274,10 +275,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Cursor getPlanList(String u_email)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor planData = db.rawQuery("SELECT * FROM "+ TABLE_PLAN + " b" +
+       /* Cursor planData = db.rawQuery("SELECT * FROM "+ TABLE_PLAN + " b" +
                 " JOIN " + TABLE_USER + " c" +
                 " ON "+ "c."+COLUMN_USER_ID +" = " +"b."+COLUMN_USER_ID
-                + " WHERE "+ COLUMN_EMAIL+" ='"+u_email+"'", null);
+                + " WHERE "+ COLUMN_EMAIL+" ='"+u_email+"'", null);*/
+        Cursor planData = db.rawQuery("SELECT * FROM "+ TABLE_PLAN, null);
 
         return planData;
     }

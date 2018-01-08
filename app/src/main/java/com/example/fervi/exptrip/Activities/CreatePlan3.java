@@ -57,7 +57,6 @@ public class CreatePlan3 extends AppCompatActivity implements View.OnClickListen
 
         //Create variables to get all information from activities to save on database
         nameOfPlan = getIntent().getStringExtra("PLAN_NAME_AC1");
-       // nameOfLocation = getIntent().getStringExtra("LOC_NAME_AC1");
         nameOfCity = getIntent().getStringExtra("CITY_NAME_AC1");
         startDateOfPlan = getIntent().getStringExtra("START_DATE");
         endDateOfPlan = getIntent().getStringExtra("END_DATE");

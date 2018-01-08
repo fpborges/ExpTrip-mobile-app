@@ -25,7 +25,6 @@ public class CreatePlanPage extends AppCompatActivity implements View.OnClickLis
 
 
     private EditText txtPlanName;
-    //private EditText txtLocation;
     public String cityLocation;
     private Button btnNext;
 
@@ -63,9 +62,7 @@ public class CreatePlanPage extends AppCompatActivity implements View.OnClickLis
         AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
                 .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES)
                 .build();
-
         places.setFilter(typeFilter);
-
     }
 
     public void sendToMap(View view) {

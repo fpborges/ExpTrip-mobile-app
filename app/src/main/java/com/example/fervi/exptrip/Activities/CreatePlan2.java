@@ -34,7 +34,6 @@ public class CreatePlan2 extends AppCompatActivity implements View.OnClickListen
     private static final String TAG = "CreatePlan2";
     private TextView startDate;
     private TextView endDate;
-
     private EditText start_date;
     private EditText end_date;
     private EditText budget;
@@ -121,7 +120,6 @@ public class CreatePlan2 extends AppCompatActivity implements View.OnClickListen
     public void SendToCreatePlan3() {
         Intent SecondActivity = getIntent();
         plan_Name = SecondActivity.getStringExtra("PLAN_NAME");
-        //location_Name = SecondActivity.getStringExtra("LOCATION_NAME");
         city_Name = SecondActivity.getStringExtra("CITY_NAME");
         String startDate = start_date.getText().toString();
         String endDate = end_date.getText().toString();
@@ -148,7 +146,6 @@ public class CreatePlan2 extends AppCompatActivity implements View.OnClickListen
             //first parameter is the context, second is the class of the activity to launch
                 Intent planName2 = new Intent(CreatePlan2.this, CreatePlan3.class);
                 planName2.putExtra("PLAN_NAME_AC1", plan_Name);
-               // planName2.putExtra("LOC_NAME_AC1", location_Name);
                 planName2.putExtra("CITY_NAME_AC1", city_Name);
                 planName2.putExtra("START_DATE", startDate.trim());
                 planName2.putExtra("END_DATE", endDate.trim());
